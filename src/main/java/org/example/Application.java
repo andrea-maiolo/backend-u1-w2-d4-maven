@@ -119,21 +119,12 @@ public class Application {
                 .sorted(Comparator.comparing(Product::getPrice).reversed())
                 .limit(10)
                 .toList();
-        
+
         mostExpensive.forEach(prod -> System.out.println(prod));
 
 
         //esercizio4
-//        Map<Order, DoubleSummaryStatistics> averagePerOrder = allOrders.stream()
-//                .collect(Collectors.groupingBy((order -> order.getProductList().stream()
-//                        .map(product -> product.getPrice())
-//                        .reduce(0.0, (product, nexProduct) -> product + nexProduct))));
-//
-//
-//        averagePerOrder.forEach((order, stats) ->
-//                System.out.println("Order: " + order + " average order total: " + stats.getAverage()));
-//
-//
+   
 
         //esercizio5
         Map<String, Double> totalPerCategory = allProducts.stream()
