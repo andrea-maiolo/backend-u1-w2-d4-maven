@@ -92,11 +92,19 @@ public class Application {
 //        Map<String, List<User>> usersByCity = users.stream().filter(user -> user.getAge() > 17).collect(Collectors.groupingBy(user -> user.getCity()));
 //        usersByCity.forEach((city, usersList) -> System.out.println("Città: " + city + ", " + usersList));
 //
-         
+
         //esercizio 2
 // 8. Raggruppiamo gli user per città e calcoliamo varie statistiche come media età, somma età, età minima, età massima...
 //        Map<String, IntSummaryStatistics> statsPerCity = users.stream().collect(Collectors.groupingBy(user -> user.getCity(), Collectors.summarizingInt(user -> user.getAge())));
 //        statsPerCity.forEach((city, stats) -> System.out.println("Città: " + city + ", stats: " + stats));
 
+        Map<Customer, DoubleSummaryStatistics> totalPerCustomer = allOrders.stream()
+                .collect(Collectors.groupingBy(order -> order.getCustomer(),
+                        Collectors.summarizingDouble(order -> order.getProductList().stream()
+                                .map(product -> product.getPrice())
+                                .reduce(0.0, (a, b) -> a + b))));
+
+
+        totalPerCustomer.forEach((customer, stats) -> System.out.println("Customer: " + customer + " total: " + stats.getSum()));
     }
 }
