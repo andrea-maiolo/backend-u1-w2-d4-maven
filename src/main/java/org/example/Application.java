@@ -84,14 +84,14 @@ public class Application {
         }
 
 //esercizio 1
+
+//        Map<String, List<User>> usersByCity = users.stream().filter(user -> user.getAge() > 17).collect(Collectors.groupingBy(user -> user.getCity()));
+//        usersByCity.forEach((city, usersList) -> System.out.println("Città: " + city + ", " + usersList));
         Map<Customer, List<Order>> ordersByCustomer = allOrders.stream()
                 .collect(Collectors.groupingBy(order -> order.getCustomer()));
 
         ordersByCustomer.forEach((custmer, order) -> System.out.println("cust: " + custmer + "order list: " + order));
 
-//        Map<String, List<User>> usersByCity = users.stream().filter(user -> user.getAge() > 17).collect(Collectors.groupingBy(user -> user.getCity()));
-//        usersByCity.forEach((city, usersList) -> System.out.println("Città: " + city + ", " + usersList));
-//
 
         //esercizio 2
 // 8. Raggruppiamo gli user per città e calcoliamo varie statistiche come media età, somma età, età minima, età massima...
@@ -105,6 +105,23 @@ public class Application {
                                 .reduce(0.0, (a, b) -> a + b))));
 
 
-        totalPerCustomer.forEach((customer, stats) -> System.out.println("Customer: " + customer + " total: " + stats.getSum()));
+        totalPerCustomer.forEach((customer, stats) ->
+                System.out.println("Customer: " + customer + " total: " + stats.getSum()));
+
+
+        //esercizio 3
+        // 1. Otteniamo i 5 user più vecchi, tramite il sorted li ordino per età decrescente, poi tramite il limit tengo solo i primi 5
+//        List<User> fiveOldUsers = users.stream().sorted(Comparator.comparing(User::getAge).reversed()).skip(0).limit(10).toList();
+//        fiveOldUsers.forEach(user -> System.out.println(user));
+
+        List<Product> mostExpensive = allProducts.stream()
+                .sorted(Comparator.comparing(product -> product.getPrice()
+                                .reversed())
+                        .limit(10)
+                        .toList()
+                );
+
+
+        mostExpensive.forEach(prod -> System.out.println(prod));
     }
 }
