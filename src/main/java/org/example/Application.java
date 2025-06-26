@@ -114,14 +114,38 @@ public class Application {
 //        List<User> fiveOldUsers = users.stream().sorted(Comparator.comparing(User::getAge).reversed()).skip(0).limit(10).toList();
 //        fiveOldUsers.forEach(user -> System.out.println(user));
 
-        List<Product> mostExpensive = allProducts.stream()
-                .sorted(Comparator.comparing(product -> product.getPrice()
-                                .reversed())
-                        .limit(10)
-                        .toList()
-                );
+//        List<Product> mostExpensive = allProducts.stream()
+//                .sorted(Comparator.comparing(product -> product.getPrice()
+//                                .reversed())
+//                        .limit(10)
+//                        .toList()
+//                );
 
 
-        mostExpensive.forEach(prod -> System.out.println(prod));
+        //mostExpensive.forEach(prod -> System.out.println(prod));
+
+
+        //esercizio4
+//        Map<Order, DoubleSummaryStatistics> averagePerOrder = allOrders.stream()
+//                .collect(Collectors.groupingBy((order -> order.getProductList().stream()
+//                        .map(product -> product.getPrice())
+//                        .reduce(0.0, (product, nexProduct) -> product + nexProduct))));
+//
+//
+//        averagePerOrder.forEach((order, stats) ->
+//                System.out.println("Order: " + order + " average order total: " + stats.getAverage()));
+//
+//
+
+        //esercizio5
+        Map<String, Double> totalPerCategory = allProducts.stream()
+                .collect(Collectors.groupingBy(
+                        product -> product.getCategory(),
+                        Collectors.summingDouble(product -> product.getPrice())
+                ));
+
+        totalPerCategory.forEach((category, total) ->
+                System.out.println("Category: " + category + " total: " + total));
+
     }
 }
