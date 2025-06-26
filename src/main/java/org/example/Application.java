@@ -124,7 +124,11 @@ public class Application {
 
 
         //esercizio4
-   
+        OptionalDouble averagePrice = allOrders.stream()
+                .flatMap(order -> order.getProductList().stream())
+                .mapToDouble(Product::getPrice)
+                .average();
+        System.out.println("average price " + averagePrice);
 
         //esercizio5
         Map<String, Double> totalPerCategory = allProducts.stream()
