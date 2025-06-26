@@ -90,7 +90,8 @@ public class Application {
         Map<Customer, List<Order>> ordersByCustomer = allOrders.stream()
                 .collect(Collectors.groupingBy(order -> order.getCustomer()));
 
-        ordersByCustomer.forEach((custmer, order) -> System.out.println("cust: " + custmer + "order list: " + order));
+        ordersByCustomer.forEach((custmer, order) ->
+                System.out.println("Customer: " + custmer + "order list: " + order));
 
 
         //esercizio 2
@@ -114,15 +115,12 @@ public class Application {
 //        List<User> fiveOldUsers = users.stream().sorted(Comparator.comparing(User::getAge).reversed()).skip(0).limit(10).toList();
 //        fiveOldUsers.forEach(user -> System.out.println(user));
 
-//        List<Product> mostExpensive = allProducts.stream()
-//                .sorted(Comparator.comparing(product -> product.getPrice()
-//                                .reversed())
-//                        .limit(10)
-//                        .toList()
-//                );
-
-
-        //mostExpensive.forEach(prod -> System.out.println(prod));
+        List<Product> mostExpensive = allProducts.stream()
+                .sorted(Comparator.comparing(Product::getPrice).reversed())
+                .limit(10)
+                .toList();
+        
+        mostExpensive.forEach(prod -> System.out.println(prod));
 
 
         //esercizio4
